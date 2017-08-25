@@ -1,8 +1,11 @@
 import React from 'react';
-import render from 'react-dom';
+import {render} from 'react-dom';
 require("./index.html");
 class War extends React.Component{
-    render(){
+    constructor(){
+        super();
+    }
+    render () {
         return <p>Hello world!</p>;
     }
 }

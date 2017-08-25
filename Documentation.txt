@@ -1,0 +1,31 @@
+Game
+    Players: Player[]
+    Deck: Card[]
+    State: string
+    Setup() // Setup all players and deal them their cards
+    Draw() // Triggers all players to draw and Compares        
+    Compare()
+        if(tied)
+            HandleWar()
+            Compare()
+        else
+            HandleRoundComplete()    
+    HandleRoundComplete()
+        HandleLoser()
+        HandleWinner()
+        if(game finished)
+            FinishGame()
+        Draw()
+    HandleWar() //Pop X number of cards from deck before face up and include in pot        
+    HandleLoser()
+    HandleWinner()
+    FinishGame()
+    
+
+Player
+    Cards: Card[]
+    PopDeck()
+
+Card
+    Numeral: string
+    Suit: string
