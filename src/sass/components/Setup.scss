@@ -1,0 +1,31 @@
+@import '../base/reset';
+@import '../base/variables';
+$vertical-spacing: 1.5rem;
+.header{
+    width: 100%;
+    padding: 5vh 0;
+    text-align: center;
+    font-size: 3rem;    
+}
+
+.get-players{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    background: $secondary-colour;
+    border: 1px solid $accent-colour;
+    color: #FFF;
+    label{
+        display: block;
+        margin: $vertical-spacing auto;
+        font-size: 1.5rem;
+    }
+    .player-value{
+        display: block;
+        margin: $vertical-spacing auto;
+    }
+    .action{
+        display: block;
+        margin: 3rem auto;
+    }
+}

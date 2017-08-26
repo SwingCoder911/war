@@ -4,7 +4,7 @@
   "description": "War",
   "main": "main.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --compilers js:babel-core/register",    
     "dev": "webpack -d --watch",
     "build": "webpack -p",
     "dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --history-api-fallback"

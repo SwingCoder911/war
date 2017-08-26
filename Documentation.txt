@@ -21,7 +21,6 @@ Game
     HandleWinner()
     FinishGame()
     
-
 Player
     Cards: Card[]
     PopDeck()
