@@ -1,0 +1,7 @@
+.error{
+    visibility: hidden;
+
+    &.visible{
+        visibility: visible;
+    }
+}
