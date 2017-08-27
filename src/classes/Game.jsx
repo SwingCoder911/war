@@ -10,14 +10,19 @@ export default class Game{
         this.State = "";
     }
     Shuffle(){
-        
+        //Implment shuffle of deck.
     }
     Setup(players){
         this.State = SetupState;
         this.Players = [];
+        this.Shuffle();
+        let cardsPerPlayer = Math.floor(this.Deck.length / players);
+        //Need to handle the last card(s) to the last players
         for(let i = 0; i < players; i++){
-            this.Players.push(new Players(`Player${i}`, this.Deck));
+            this.Players.push(new Players(`Player${i}`, this.Deck.slice(i * cardsPerPlayer, i * cardsPerPlayer + cardsPerPlayer)));
         }
+        this.Sate = BattleState;
+        console.log(this.Players);
     }
     Draw(){
 

@@ -4,7 +4,7 @@
   "description": "War",
   "main": "main.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register",    
+    "test": "mocha --compilers js:babel-core/register",
     "dev": "webpack -d --watch",
     "build": "webpack -p",
     "dev-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --history-api-fallback"
@@ -38,6 +38,7 @@
     "mocha": "^3.5.0",
     "node-sass": "^4.5.3",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^1.3.1",
     "resolve-url-loader": "^2.1.0",

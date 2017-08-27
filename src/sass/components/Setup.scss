@@ -12,9 +12,8 @@ $vertical-spacing: 1.5rem;
     width: 50%;
     margin: 0 auto;
     text-align: center;
-    background: $secondary-colour;
     border: 1px solid $accent-colour;
-    color: #FFF;
+
     label{
         display: block;
         margin: $vertical-spacing auto;
@@ -23,6 +22,8 @@ $vertical-spacing: 1.5rem;
     .player-value{
         display: block;
         margin: $vertical-spacing auto;
+        width: 5rem;
+        text-align: center;
     }
     .action{
         display: block;

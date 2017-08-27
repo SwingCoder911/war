@@ -9,7 +9,7 @@ class War extends React.Component{
         this.Game = new Game();
     }
     render () {
-        return <Setup />
+        return <Setup game={this.Game} />
     }
 }
 
