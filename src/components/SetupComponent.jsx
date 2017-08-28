@@ -58,8 +58,3 @@ export default class Setup extends React.Component{
         );
     }
 }
-
-/*Setup.propTypes = {
-    game: Game,
-    updateState: PropTypes.func.isRequired
-};*/

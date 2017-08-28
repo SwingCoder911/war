@@ -34,11 +34,15 @@ export class Game{
     }
     //All players draw card
     Draw(){
-
+        this.Players.forEach((player) => {
+            player.Draw();
+        });
     }
+
     //Compare all cards
     Compare(){
-
+        //Compare the top card of all player's Played fields. Return a list of winners
+        //Initiate war if more than 1
     }
     HandleRoundComplete(){
 

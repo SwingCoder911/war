@@ -11,25 +11,20 @@ const getPlayerItems = (players) => {
     return playerItems;
 };
 export default class Battle extends React.Component{
-    constructor(){
-        super();
-        this.Game = this.props.game;      
+    initialize(){
+        this.Game.Draw();
     }
     render(){
+        this.Game = this.props.game;
         return (
             <section>
                 <div className="deck-area">
 
                 </div>
                 <div className="player-area">
-                    {getPlayerItems(this.props.game.Players)}
+                    {getPlayerItems(this.Game.Players)}
                 </div>
             </section>
         );
     }
 }
-
-/*Battle.propTypes = {
-    game: Game,
-    updateState: PropTypes.func.isRequired
-};*/

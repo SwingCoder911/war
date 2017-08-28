@@ -17,6 +17,7 @@ class War extends React.Component{
         this.setState({gameState: newState});
     }
     render () {        
+       
         if(this.state.gameState === SetupState){
             return <Setup 
                         game={this.Game} 
