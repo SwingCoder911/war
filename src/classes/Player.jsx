@@ -5,7 +5,12 @@ export default class Player{
         this.Played = [];
     }
     Draw(){
-        this.Played.push(this.PopDeck());
+        let top = this.PopDeck();
+        if(top === null){
+            return null;
+        }
+        this.Played.push(top);
+        return top;
     }
     FlushPlayed(){
         let flush = this.Played.slice(0);
