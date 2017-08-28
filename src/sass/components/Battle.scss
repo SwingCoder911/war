@@ -10,6 +10,10 @@
         flex: 1;
         padding: 5rem;
         text-align: center;
+
+        &.war-player{
+            border: 1px solid red;
+        }
     }
 }
 .player-area{

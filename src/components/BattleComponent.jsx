@@ -16,14 +16,18 @@ const getPlayerItems = (players) => {
     });
     return playerItems;
 };
-const getCardPot = (players) => {
+const getCardPot = (players, warContestants) => {
     let potItems = [];
+    let warNames = warContestants.reduce((acc, player) => {
+        return acc.concat(player.Name);
+    }, []);
+    console.log(warNames);
     players.forEach((player, index) => {
         if(player.Played.length === 0){
             return;
         }
         let played = player.Played[player.Played.length - 1];
-        potItems.push(<div key={index} className="played-card">
+        potItems.push(<div key={index} className={`played-card${(warNames.indexOf(player.Name) !== -1) ? ' war-player': ''}`}>
                             <span className="card-numeral">{played.Numeral}</span><br/>
                             <label className="card-suit">{played.Suit}</label>
                         </div>);
@@ -34,7 +38,8 @@ export default class Battle extends React.Component{
     constructor(){
         super();
         this.state = {
-            recentWinner: null
+            recentWinner: null,
+            warContestants: []
         };
     }
     componentWillMount(){
@@ -46,18 +51,27 @@ export default class Battle extends React.Component{
             this.Game.HandleWinner(this.state.recentWinner);
         }        
         let winners = this.Game.Draw();
-        //if(winners.length > 0)
-        this.setState({recentWinner: winner});
+        if(winners.length > 1){
+            this.setState({warContestants: winners});
+        }else{
+            this.setState({recentWinner: winners[0]});
+        }
         this.forceUpdate();
     }
+    beginWar(){
+        console.log("Charge!!");
+    }
     render(){        
+        let actionButton = (this.state.warContestants.length > 0) ? 
+            <button className="btn btn-primary draw-action" onClick={this.beginWar.bind(this)}>Fight War!</button> :
+            <button className="btn btn-primary draw-action" onClick={this.beginDraw.bind(this)}>Draw!</button>;
         return (
             <section>
                 <div className="deck-area">
-                    {getCardPot(this.Game.Players)}
+                    {getCardPot(this.Game.Players, this.state.warContestants)}
                 </div>
                 <div className="player-area">
-                    <button className="btn btn-primary draw-action" onClick={this.beginDraw.bind(this)}>Draw!</button>
+                   {actionButton}
                     <div className="player-container">
                         {getPlayerItems(this.Game.Players)}
                     </div>                 
