@@ -45,25 +45,38 @@ export default class Battle extends React.Component{
     componentWillMount(){
         this.Game = this.props.game;
     }
+    handleWinners(winners){
+        if(winners.length > 1){
+            this.setState({warContestants: winners});
+        }else{
+            this.setState({warContestants: []});
+            this.setState({recentWinner: winners[0]});
+        }
+        if(this.Game.IsGameOver()){
+            this.props.updateState(CompleteState);
+        }else{
+            this.forceUpdate();
+            if(winners.length === 1){
+                this.Game.HandleWinner(winners[0]);
+                //Need to clean current pot after button clicked to start next round.
+            }
+        }
+    }
     beginDraw(){
         if(this.state.recentWinner !== null){
             console.log(this.state.recentWinner);
             this.Game.HandleWinner(this.state.recentWinner);
         }        
         let winners = this.Game.Draw();
-        if(winners.length > 1){
-            this.setState({warContestants: winners});
-        }else{
-            this.setState({recentWinner: winners[0]});
-        }
-        this.forceUpdate();
+        this.handleWinners(winners);
     }
     beginWar(){
-        console.log("Charge!!");
+       let winners = this.Game.HandleWar(this.state.warContestants);
+       this.handleWinners(winners);
     }
     render(){        
         let actionButton = (this.state.warContestants.length > 0) ? 
-            <button className="btn btn-primary draw-action" onClick={this.beginWar.bind(this)}>Fight War!</button> :
+            <button className="btn btn-danger draw-action" onClick={this.beginWar.bind(this)}>Fight War!</button> :
             <button className="btn btn-primary draw-action" onClick={this.beginDraw.bind(this)}>Draw!</button>;
         return (
             <section>

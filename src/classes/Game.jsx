@@ -41,9 +41,6 @@ export class Game{
         });
         let winners = this.CompareAll();
         this.HandleLoser();
-        if(this.Players.length === 1){
-            this.FinishGame();
-        }
         return winners;
     }
     ComparePlayers(players){
@@ -62,13 +59,15 @@ export class Game{
     }
     //Compare all cards
     CompareAll(){
-        let currentWinners = this.ComparePlayers(this.Players);
-        return currentWinners;
+        return this.ComparePlayers(this.Players);
         /*if(currentWinners.length > 1){
             return this.HandleWar(currentWinners);
         }else{
             return currentWinners[0];
         }*/
+    }
+    IsGameOver(){
+        return this.Players.length <= 1;
     }
     HandleRoundComplete(){
 
@@ -84,14 +83,15 @@ export class Game{
             }
             if(draw !== null){
                 player.Draw();
-            }            
+            }
+            console.log(player.Played);
         });
-        let currentWinners = this.ComparePlayers(winners);
-        if(currentWinners.length > 1){
+        return this.ComparePlayers(winners);
+        /*if(currentWinners.length > 1){
             return this.HandleWar(currentWinners);
         }else{
             return currentWinners[0];
-        }
+        }*/
     }
     HandleLoser(){
         let i = 0;
