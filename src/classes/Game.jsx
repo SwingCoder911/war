@@ -9,15 +9,17 @@ export class Game{
     constructor(){
         this.Players = [];
         this.Deck = GameDeck;
+        console.log(GameDeck);
     }
     //Shuffle local deck
     Shuffle(){
         let shuffled = [];
-        while(this.Deck.length > 1){
-            let rand = Math.round(Math.random() * (this.Deck.length - 1));
-            shuffled.push(this.Deck.splice(rand, 1)[0]);
+        let preShuffled = this.Deck.slice(0);
+        while(preShuffled.length > 1){
+            let rand = Math.round(Math.random() * (preShuffled.length - 1));
+            shuffled.push(preShuffled.splice(rand, 1)[0]);
         }
-        shuffled.push(this.Deck.shift());
+        shuffled.push(preShuffled.shift());
         this.Deck = shuffled;
     }
     //Setup game with players specified in setup view
@@ -60,17 +62,9 @@ export class Game{
     //Compare all cards
     CompareAll(){
         return this.ComparePlayers(this.Players);
-        /*if(currentWinners.length > 1){
-            return this.HandleWar(currentWinners);
-        }else{
-            return currentWinners[0];
-        }*/
     }
     IsGameOver(){
         return this.Players.length <= 1;
-    }
-    HandleRoundComplete(){
-
     }
     HandleWar(winners){
         winners.forEach((player) => {
@@ -87,11 +81,6 @@ export class Game{
             console.log(player.Played);
         });
         return this.ComparePlayers(winners);
-        /*if(currentWinners.length > 1){
-            return this.HandleWar(currentWinners);
-        }else{
-            return currentWinners[0];
-        }*/
     }
     HandleLoser(){
         let i = 0;
@@ -109,8 +98,5 @@ export class Game{
             pot = pot.concat(player.FlushPlayed());
         });
         winner.Cards = pot.concat(winner.Cards);
-    }
-    FinishGame(){
-        alert("Game Finished!");
     }
 }

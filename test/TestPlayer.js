@@ -1,5 +1,5 @@
 import {Card, Suits} from '../src/classes/Card.jsx';
-import {Player} from '../src/classes/Player.jsx';
+import Player from '../src/classes/Player.jsx';
 var assert = require('assert');
 let badNames = [
   1,
@@ -68,8 +68,8 @@ describe('Player', function() {
     it(`should return top card and remove top card when popped with multiple cards in deck`, function(){
         let player = new Player('Batman', cards.slice(0));
         let initLength = player.Cards.length;
-        let card = player.PopDeck();
-        assert(card.Numeral === cards[0].Numeral && card.Suit === cards[0].Suit && initLength === (player.Cards.length + 1));
+        let card = player.PopDeck(), lastCard = cards[cards.length - 1];
+        assert(card.Numeral === lastCard.Numeral && card.Suit === lastCard.Suit && initLength === (player.Cards.length + 1));
     });
     /**
      * Test player with single card in deck
