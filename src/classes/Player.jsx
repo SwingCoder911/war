@@ -13,6 +13,7 @@ export default class Player{
         return top;
     }
     FlushPlayed(){
+        console.log("Flushing player: ", this);
         let flush = this.Played.slice(0);
         this.Played = [];
         return flush;
@@ -21,6 +22,6 @@ export default class Player{
         if(this.Cards.length === 0){
             return null;
         }
-        return this.Cards.shift();
+        return this.Cards.pop();
     }
 }

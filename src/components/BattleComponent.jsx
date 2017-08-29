@@ -21,15 +21,19 @@ const getCardPot = (players, warContestants) => {
     let warNames = warContestants.reduce((acc, player) => {
         return acc.concat(player.Name);
     }, []);
-    console.log(warNames);
     players.forEach((player, index) => {
         if(player.Played.length === 0){
             return;
         }
-        let played = player.Played[player.Played.length - 1];
-        potItems.push(<div key={index} className={`played-card${(warNames.indexOf(player.Name) !== -1) ? ' war-player': ''}`}>
-                            <span className="card-numeral">{played.Numeral}</span><br/>
-                            <label className="card-suit">{played.Suit}</label>
+        let playerCards = [];
+        player.Played.forEach((card, cIndex) => {
+            playerCards.push(<div key={cIndex} className="played-card">
+                            <span className="card-numeral">{card.Numeral}</span><br/>
+                            <label className="card-suit">{card.Suit}</label>
+                        </div>);
+        });
+        potItems.push(<div key={index} className={`player-played${(warNames.indexOf(player.Name) !== -1) ? ' war-player': ''}`}>
+                            {playerCards}
                         </div>);
     });
     return potItems;
@@ -47,30 +51,33 @@ export default class Battle extends React.Component{
     }
     handleWinners(winners){
         if(winners.length > 1){
-            this.setState({warContestants: winners});
+            this.setState({
+                warContestants: winners,
+                recentWinner: null
+            });
         }else{
-            this.setState({warContestants: []});
-            this.setState({recentWinner: winners[0]});
+            this.setState({
+                warContestants: [],
+                recentWinner: winners[0]
+            });
         }
         if(this.Game.IsGameOver()){
             this.props.updateState(CompleteState);
         }else{
             this.forceUpdate();
-            if(winners.length === 1){
-                this.Game.HandleWinner(winners[0]);
-                //Need to clean current pot after button clicked to start next round.
-            }
         }
     }
     beginDraw(){
         if(this.state.recentWinner !== null){
-            console.log(this.state.recentWinner);
             this.Game.HandleWinner(this.state.recentWinner);
-        }        
+        }
         let winners = this.Game.Draw();
         this.handleWinners(winners);
     }
     beginWar(){
+        if(this.state.recentWinner !== null){
+            this.Game.HandleWinner(this.state.recentWinner);
+        }
        let winners = this.Game.HandleWar(this.state.warContestants);
        this.handleWinners(winners);
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 import Setup from './components/SetupComponent.jsx';
 import Battle from './components/BattleComponent.jsx';
 import Complete from './components/CompleteComponent.jsx';
@@ -35,4 +35,4 @@ class War extends React.Component{
     }
 }
 
-render(<War/>, document.getElementById('app'));
+ReactDOM.render(<War/>, document.getElementById('app'));

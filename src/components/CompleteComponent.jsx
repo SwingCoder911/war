@@ -9,8 +9,8 @@ export default class Complete extends React.Component{
     }
     render(){
         return (
-            <section>
-             
+            <section className="complete">
+                <h1>That's finally over!<br/>Thank you for playing!</h1>
             </section>
         );
     }

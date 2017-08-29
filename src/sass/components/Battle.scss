@@ -6,14 +6,24 @@
     height: 49vh;
     display: flex;
     flex-wrap: wrap;
-    .played-card{
+    .player-played{
         flex: 1;
         padding: 2rem;
         margin: 3rem;
         text-align: center;
-
+        display: flex;
+        border: 1px solid #ccc;
         &.war-player{
             border: 1px solid red;
+        }
+
+        .played-card{
+            flex: 1;
+            height: 10rem;
+            padding: 1rem;
+            &:last-child{
+                border: 1px solid #2e6da4;
+            }
         }
     }
 }
