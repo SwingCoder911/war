@@ -22,7 +22,7 @@ describe('Game', function() {
     });
   });
   describe('#Setup()', function() {
-    let acceptable = [0, 1, 2];
+    let acceptable = [1, 2, 3, 4, 5];
     acceptable.forEach(function(value) {
       it(`should should create a game with player number: ${value}`, function() {
         let game = new Game();
@@ -33,6 +33,25 @@ describe('Game', function() {
     
   });
   describe('#Draw()', function() {
+    it(`Draw should take every player's deck down by 1`, function() {
+      let playerNum = 3,
+          allOffBy1 = true;
+      let game = new Game();
+      game.Setup(playerNum);
+      let initCounts = game.Players.reduce((acc, player) => {
+        acc.push(player.Cards.length);
+        return acc;
+      }, []);
+      game.Draw();
+      game.Players.forEach((player, i) => {
+        if(player.Cards.length === initCounts[i]){
+          allOffBy1 = false;
+        }
+      });
+      assert(allOffBy1);
+    });
+  });
+  describe('#ComparePlayers()', function() {
     it('should assert true', function() {
       assert(true);
     });
@@ -42,11 +61,7 @@ describe('Game', function() {
       assert(true);
     });
   });
-  describe('#ComparePlayers()', function() {
-    it('should assert true', function() {
-      assert(true);
-    });
-  });
+  
   describe('#HandleWar()', function() {
     it('should assert true', function() {
       assert(true);

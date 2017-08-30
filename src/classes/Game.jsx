@@ -9,7 +9,6 @@ export class Game{
     constructor(){
         this.Players = [];
         this.Deck = GameDeck;
-        console.log(GameDeck);
     }
     //Shuffle local deck
     Shuffle(){
@@ -24,7 +23,7 @@ export class Game{
     }
     //Setup game with players specified in setup view
     Setup(players){
-        if(isNaN(parseInt(players)) || players < 0 || players > this.Deck.length){
+        if(isNaN(parseInt(players)) || players <= 0 || players > this.Deck.length){
             return;
         }        
         this.Players = [];
@@ -34,6 +33,11 @@ export class Game{
         for(let i = 0; i < players; i++){
             let start = i * cardsPerPlayer;
             this.Players.push(new Player(`Player ${i}`, this.Deck.slice(start, start + cardsPerPlayer)));
+        }
+        let lastCards = this.Deck.slice(players * cardsPerPlayer, this.Deck.length);
+        let i = 0;
+        while(lastCards.length > 0){
+            this.Players[i++].Cards.push(lastCards.pop());
         }
     }
     //All players draw card
@@ -78,7 +82,6 @@ export class Game{
             if(draw !== null){
                 player.Draw();
             }
-            console.log(player.Played);
         });
         return this.ComparePlayers(winners);
     }
